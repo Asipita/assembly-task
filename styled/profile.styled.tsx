@@ -39,8 +39,8 @@ export const ProfileLink = styled(Link)`
 export const BackLink = styled(ProfileLink)`
   position: absolute;
   top: 1rem;
-  left:1rem;
-`
+  left: 1rem;
+`;
 
 export const ProfileBioContainer = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ export const ProfileUsername = styled(ProfileName)`
 
 export const ProfileBio = styled.p`
   font-size: 1rem;
+  color: #2c5364;
 `;
 
 export const ProfileStatsContainer = styled.div`
@@ -69,6 +70,7 @@ export const ProfileStatsContainer = styled.div`
   flex-direction: row;
   font-size: 0.75rem;
   gap: 1rem;
+  color: #2c5364;
   @media (min-width: 640px) {
     justify-content: space-between;
     gap: 2rem;
