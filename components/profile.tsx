@@ -1,29 +1,21 @@
 import {
   Profile as StyledProfile,
   ProfileAvatarContainer,
-  ProfileBio,
   ProfileBioContainer,
-  ProfileName,
-  ProfileStatsContainer,
   ProfileUsername,
+  ProfileLink,
 } from "@/styled/profile.styled";
+import Image from "next/image";
 
-export function Profile() {
+export function Profile({ imageUrl, login }) {
   return (
     <StyledProfile>
-      <ProfileAvatarContainer />
+      <ProfileAvatarContainer>
+        <Image src={imageUrl} alt="" className="rounded-full" fill />
+      </ProfileAvatarContainer>
       <ProfileBioContainer>
-        <ProfileName>Shuaib Abdulgafar</ProfileName>
-        <ProfileUsername>@asipita</ProfileUsername>
-        <ProfileBio>
-          Bio: JAMstack Developer [React.js, Nextjs, Typescript] something
-          something something
-        </ProfileBio>
-        <ProfileStatsContainer>
-          <span>27 followers</span>
-          <span>27 followers</span>
-          <span>27 followers</span>
-        </ProfileStatsContainer>
+        <ProfileUsername>@{login}</ProfileUsername>
+        <ProfileLink href={`/${login}`}>view details</ProfileLink>
       </ProfileBioContainer>
     </StyledProfile>
   );

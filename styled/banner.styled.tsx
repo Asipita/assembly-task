@@ -17,13 +17,12 @@ export const Banner = styled.section`
 export const BannerTitle = styled.h1`
   text-align: center;
   padding: 1rem;
-  /* border: 1px solid white; */
   font-size: 2rem;
   font-weight: bold;
   color: white;
 `;
 
-export const BannerContent = styled.div`
+export const BannerContent = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;

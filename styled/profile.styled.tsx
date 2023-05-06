@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Profile = styled.div`
@@ -6,7 +7,7 @@ export const Profile = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   gap: 1rem;
   padding: 1.5rem;
   max-width: 500px;
@@ -25,7 +26,21 @@ export const ProfileAvatarContainer = styled.div`
   background-color: #f5f5f5;
   display: flex;
   flex-shrink: 0;
+  position: relative;
 `;
+
+export const ProfileLink = styled(Link)`
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+export const BackLink = styled(ProfileLink)`
+  position: absolute;
+  top: 1rem;
+  left:1rem;
+`
 
 export const ProfileBioContainer = styled.div`
   display: flex;
