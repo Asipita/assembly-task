@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import { Button } from "@/components/button";
 import { Input } from "@/styled/input.styled";
 import { Profile } from "@/components/profile";
+import { Banner } from "@/layouts/banner";
+import { Results } from "@/layouts/results";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -16,11 +18,12 @@ const GlobalStyle = createGlobalStyle`
 
 export default function Home() {
   return (
-    <div>
+    <>
       <GlobalStyle />
-      <Button isLoading>Search</Button>
-      <Input placeholder="Enter username or org name..." />
-      <Profile />
-    </div>
+      <main>
+        <Banner />
+        <Results />
+      </main>
+    </>
   );
 }
