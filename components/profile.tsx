@@ -9,13 +9,15 @@ import Image from "next/image";
 
 export function Profile({ imageUrl, login }) {
   return (
-    <StyledProfile>
+    <StyledProfile data-cy={login}>
       <ProfileAvatarContainer>
         <Image src={imageUrl} alt="" className="rounded-full" fill />
       </ProfileAvatarContainer>
       <ProfileBioContainer>
         <ProfileUsername>@{login}</ProfileUsername>
-        <ProfileLink href={`/${login}`}>view details</ProfileLink>
+        <ProfileLink href={`/${login}`} data-cy={`${login}_details`}>
+          view details
+        </ProfileLink>
       </ProfileBioContainer>
     </StyledProfile>
   );
