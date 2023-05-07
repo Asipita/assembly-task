@@ -6,7 +6,7 @@ export const Profile = styled.div`
   border-radius: 16px;
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
@@ -31,6 +31,7 @@ export const ProfileAvatarContainer = styled.div`
 
 export const ProfileLink = styled(Link)`
   text-decoration: underline;
+  font-size: 1rem;
   &:hover {
     text-decoration: none;
   }
