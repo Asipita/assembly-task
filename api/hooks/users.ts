@@ -28,5 +28,6 @@ export function useGetUsers(query: string, type: string, page: number = 1) {
     },
     getNextPageParam: (lastPage) =>
       page < lastPage.data.total_count / perPage ? page + 1 : undefined,
+    enabled: !!query,
   });
 }
