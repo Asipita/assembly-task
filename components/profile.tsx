@@ -7,11 +7,23 @@ import {
 } from "@/styled/profile.styled";
 import Image from "next/image";
 
-export function Profile({ imageUrl, login }) {
+export interface IProfile {
+  avatar_url: string;
+  login: string;
+  id?: number;
+  name?: string;
+  bio?: string;
+  public_repos?: number;
+  following?: number;
+  followers?: number;
+  html_url?: string;
+}
+
+export function Profile({ avatar_url, login }: IProfile) {
   return (
     <StyledProfile data-cy={login}>
       <ProfileAvatarContainer>
-        <Image src={imageUrl} alt="" className="rounded-full" fill />
+        <Image src={avatar_url} alt="" className="rounded-full" fill />
       </ProfileAvatarContainer>
       <ProfileBioContainer>
         <ProfileUsername>@{login}</ProfileUsername>

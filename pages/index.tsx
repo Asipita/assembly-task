@@ -3,10 +3,12 @@ import { Button } from "@/components/button";
 import { Banner } from "@/layouts/banner";
 import { Results } from "@/layouts/results";
 import { AppContainer } from "@/styled/app-container.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetUsers } from "@/api/hooks/users";
 import { useRouter } from "next/router";
 import { useUpdateQuery } from "@/api/hooks/updateQuery";
+
+import { useInView } from "react-intersection-observer";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -20,14 +22,27 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Home() {
+  const [page, setPage] = useState<number>(1);
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
-  const [type, setType] = useState<"individual" | "org">("individual");
-  const updateQuery = useUpdateQuery(() =>
-    setQuery(router.query.query as string)
+  const [type, setType] = useState<"individual" | "org">(() =>
+    router.asPath.includes("+type:org") ? "org" : "individual"
   );
-  const { isLoading, fetchStatus, ...rest } = useGetUsers(query, type);
-
+  useUpdateQuery(() => setQuery(router.query.query as string));
+  const { isLoading, fetchStatus, fetchNextPage, hasNextPage, ...rest } =
+    useGetUsers(query, type, page);
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+  useEffect(
+    function () {
+      if (inView) {
+        setPage((page) => page + 1);
+        fetchNextPage();
+      }
+    },
+    [inView, fetchNextPage]
+  );
   return (
     <>
       <GlobalStyle />
@@ -42,8 +57,9 @@ export default function Home() {
             </Button>
           }
         />
-        <Results query={query} {...rest} />
+        <Results {...rest} />
       </AppContainer>
+      <div ref={ref} />
     </>
   );
 }

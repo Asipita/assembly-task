@@ -1,3 +1,4 @@
+import { useUpdateQuery } from "@/api/hooks/updateQuery";
 import { Input } from "@/components/input";
 import {
   BannerContent,
@@ -7,7 +8,7 @@ import {
   Banner as StyledBanner,
 } from "@/styled/banner.styled";
 import { useRouter } from "next/router";
-import { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
+import { Dispatch, FormEvent, ReactNode, SetStateAction, useRef } from "react";
 export function Banner({
   setQuery,
   button,
@@ -20,6 +21,7 @@ export function Banner({
   setType: Dispatch<SetStateAction<"individual" | "org">>;
 }) {
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement | null>(null);
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form: HTMLFormElement = e?.currentTarget;
@@ -34,6 +36,11 @@ export function Banner({
     );
   }
 
+  useUpdateQuery(function (query) {
+    const input = formRef.current?.querySelector("input");
+    input!.value = query.split("type")[0];
+  });
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setType(event.target?.value as "individual" | "org");
   }
@@ -41,7 +48,7 @@ export function Banner({
   return (
     <StyledBanner>
       <BannerTitle>Github Profile Finder</BannerTitle>
-      <BannerForm onSubmit={handleSubmit}>
+      <BannerForm onSubmit={handleSubmit} ref={formRef}>
         <BannerContent>
           <Input
             placeholder="Enter username or org name"

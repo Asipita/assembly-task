@@ -1,23 +1,21 @@
 import { axiosInstance } from "@/api";
+import { IProfile } from "@/components/profile";
 import {
   BackLink,
   Profile,
   ProfileAvatarContainer,
   ProfileBio,
   ProfileBioContainer,
-  ProfileLink,
   ProfileName,
   ProfileStatsContainer,
   ProfileUsername,
 } from "@/styled/profile.styled";
-import axios, { AxiosError } from "axios";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function User({ user }) {
+export default function User({ user }: {user: IProfile}) {
   const router = useRouter();
   const {
     avatar_url,
