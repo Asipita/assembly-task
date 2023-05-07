@@ -22,15 +22,28 @@ export const BannerTitle = styled.h1`
   color: white;
 `;
 
-export const BannerContent = styled.form`
+export const BannerContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  /* border: 1px solid white; */
+
   @media (min-width: 640px) {
     flex-direction: row;
   }
+`;
+
+export const BannerForm = styled.form`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+`;
+
+export const BannerRadioContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  color: #bcbcbc;
 `;

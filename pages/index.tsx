@@ -1,11 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import { Button } from "@/components/button";
-import { Input } from "@/styled/input.styled";
-import { Profile } from "@/components/profile";
 import { Banner } from "@/layouts/banner";
 import { Results } from "@/layouts/results";
 import { AppContainer } from "@/styled/app-container.styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetUsers } from "@/api/hooks/users";
 import { useRouter } from "next/router";
 import { useUpdateQuery } from "@/api/hooks/updateQuery";
@@ -24,19 +22,11 @@ const GlobalStyle = createGlobalStyle`
 export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
+  const [type, setType] = useState<"individual" | "org">("individual");
   const updateQuery = useUpdateQuery(() =>
     setQuery(router.query.query as string)
   );
-  const { isLoading, fetchStatus, ...rest } = useGetUsers(query);
-
-  // useEffect(
-  //   function () {
-  //     if (router.query.query) {
-  //       setQuery(router.query.query as string);
-  //     }
-  //   },
-  //   [router.query.query]
-  // );
+  const { isLoading, fetchStatus, ...rest } = useGetUsers(query, type);
 
   return (
     <>
@@ -44,6 +34,8 @@ export default function Home() {
       <AppContainer>
         <Banner
           setQuery={setQuery}
+          setType={setType}
+          type={type}
           button={
             <Button isLoading={isLoading && fetchStatus !== "idle"}>
               Search
