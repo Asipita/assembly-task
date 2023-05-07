@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Home() {
-  const [page, setPage] = useState<number>(1);
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
   const [type, setType] = useState<"individual" | "org">(() =>
@@ -30,18 +29,18 @@ export default function Home() {
   );
   useUpdateQuery(() => setQuery(router.query.query as string));
   const { isLoading, fetchStatus, fetchNextPage, hasNextPage, ...rest } =
-    useGetUsers(query, type, page);
+    useGetUsers(query, type);
   const { ref, inView } = useInView({
     threshold: 0,
   });
   useEffect(
     function () {
-      if (inView) {
-        setPage((page) => page + 1);
+      if (inView && query) {
+        // setPage((page) => page + 1);
         fetchNextPage();
       }
     },
-    [inView, fetchNextPage]
+    [inView, fetchNextPage, query]
   );
   return (
     <>
