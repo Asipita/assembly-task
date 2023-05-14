@@ -4,7 +4,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
 
 export const queryClient = new QueryClient({
-  defaultOptions: {},
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
 });
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -36,7 +36,6 @@ export default function Home() {
   useEffect(
     function () {
       if (inView && query) {
-        // setPage((page) => page + 1);
         fetchNextPage();
       }
     },
