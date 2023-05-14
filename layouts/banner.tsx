@@ -54,6 +54,7 @@ export function Banner({
             placeholder="Enter username or org name"
             aria-label="Enter username or org name"
             name="search"
+            data-cy="query-input"
           />
           {button}
         </BannerContent>
